@@ -1,0 +1,43 @@
+# Установка библиотеки colorama
+!pip install colorama
+
+# Импортируем библиотеку
+import colorama
+from colorama import Fore, Back, Style
+import inspect
+
+# Выполняем интроспекцию модуля colorama
+def introspect_module(module):
+    print(f"Интроспекция модуля: {module.__name__}")
+    print("\nДокументация модуля:\n", module.__doc__)
+    print("\nСодержимое модуля:\n")
+    
+    for name, obj in inspect.getmembers(module):
+        # Выводим только важные атрибуты и методы
+        if not name.startswith("_"):
+            if inspect.isclass(obj):
+                print(f"Класс: {name}")
+                print(inspect.getdoc(obj))
+            elif inspect.isfunction(obj):
+                print(f"Функция: {name}")
+                print(inspect.signature(obj))
+                print(inspect.getdoc(obj))
+            elif inspect.ismodule(obj):
+                print(f"Модуль: {name}")
+            else:
+                print(f"Атрибут: {name} = {obj}")
+
+# Запускаем интроспекцию модуля colorama
+introspect_module(colorama)
+
+# Интроспекция класса Fore
+print("\n=== Интроспекция класса Fore ===")
+introspect_module(Fore)
+
+# Интроспекция класса Back
+print("\n=== Интроспекция класса Back ===")
+introspect_module(Back)
+
+# Интроспекция класса Style
+print("\n=== Интроспекция класса Style ===")
+introspect_module(Style)
